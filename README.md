@@ -2,7 +2,7 @@
 
 Instead of using, for instance, `256d=>256d` linear layers Many-Vector Networks
 might parallelise 256 `16d=>16d` transformations in a single layer. Both
-approaches use the similar memory/computational resources, but the many-vector
+approaches use similar memory/computational resources, but the many-vector
 approach can handle 16x more features.
 
 Many-Vector Networks demonstrated better accuracy than Self-Normalizing Networks

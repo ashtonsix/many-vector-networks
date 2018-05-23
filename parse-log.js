@@ -25,10 +25,13 @@ let parsed = {}
 for (let i = 0; i < nets.length; i++) {
   const net = nets[i].trim()
   const result = results[i]
-  const [rows, cols, labels, title] = result
+  let [rows, cols, labels, title] = result
     .match(/(\d+) rows, (\d+) cols, (\d+) unique labels in '([\w\-]+)'/)
     .slice(1)
     .map(s => s.trim())
+  rows = parseInt(rows, 10)
+  cols = parseInt(cols, 10)
+  labels = parseInt(labels, 10)
 
   const [loss, accuracy] = maxBy(
     result
@@ -45,18 +48,20 @@ for (let i = 0; i < nets.length; i++) {
   )
 
   if (!parsed[title]) parsed[title] = {}
-  parsed[title][net] = {title, net, loss, accuracy, labels}
+  parsed[title][net] = {title, net, loss, accuracy, rows, cols, labels}
 }
 
 parsed = Object.values(parsed)
 parsed.sort((a, b) => (a['RNet'].title > b['RNet'].title ? 1 : -1))
 
-console.log(',RNet,SNet,MNet - 1block, MNet - 3block')
+console.log(',Rows,Labels,RNet,SNet,MNet - 1block, MNet - 3block')
 parsed.forEach(v => {
   const title = v.RNet.title
+  const r_ = v['RNet'].rows
+  const l_ = v['RNet'].labels
   const r = (v['RNet'].accuracy * 100).toFixed(1)
   const s = (v['SNet'].accuracy * 100).toFixed(1)
   const m1 = (v['MNet - 1block'].accuracy * 100).toFixed(1)
   const m3 = (v['MNet - 3block'].accuracy * 100).toFixed(1)
-  console.log(`${title},${r},${s},${m1},${m3}`)
+  console.log(`${title},${r_},${l_},${r},${s},${m1},${m3}`)
 })

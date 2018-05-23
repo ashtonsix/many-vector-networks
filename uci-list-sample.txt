@@ -1,0 +1,15 @@
+4177 abalone
+898 annealing
+625 balance-scale
+4521 bank
+748 blood
+1728 car
+3196 chess-krvkp
+990 conn-bench-vowel-deterding
+1212 hill-valley
+2310 image-segmentation
+1000 led-display
+5473 page-blocks
+4601 spambase
+600 synthetic-control
+958 tic-tac-toe
